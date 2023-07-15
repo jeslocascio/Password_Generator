@@ -18,44 +18,57 @@ function writePassword() {
 }
 
 var generatePassword = function() {
+  var userChoice = 0;
+
   var userChoice = prompt("Select a password length between 8 and 128 characters");
-  // var tryAgain = prompt("Make sure to choose a number between 8 and 128 characters"); 
- if (userChoice < 8 || userChoice > 128 || null) {
+  
+ if (userChoice < 8 || userChoice > 128 || null || isNaN(userChoice)) {
   alert("Make sure to choose a number between 8 and 128 characters"); 
-  return;
+  return ("Your password is too short!");
 } 
 
  var newPassword = "";
 
  var addCapital = confirm("Should the password have capital letters?");
  if (addCapital) {
-  newPassword += password;
-  console.log(addCapital);
-  // return newPassword;
+  newPassword = capitalLetters.concat(newPassword);
  }
 
  var addLower = confirm("Should the password have lowercase letters?");
  if (addLower) {
-  newPassword += password;
-  console.log(addLower);
-  // return newPassword;
+  newPassword = lowercaseLetters.concat(newPassword);
  }
 
  var addNumbers = confirm("Should the password have numbers?");
  if (addNumbers) {
-  newPassword += password;
-  console.log(addNumbers);
-  // return newPassword;
+  newPassword = numbers.concat(newPassword);
+
  }
 
  var addSpecial = confirm("Should the password have special characters?");
  if (addSpecial) {
-  newPassword += password;
-  console.log(addSpecial);
-  // return newPassword;
+  newPassword = specialCharacters.concat(newPassword);
  }
 
-}
+
+ 
+ if ( !addCapital , !addLower , !addSpecial , !addNumbers)
+  {
+    alert(
+      "It's not secure to have a blank password!"
+    );
+    window.location.reload();
+  }
+
+ let arr = Array.from(newPassword);
+ console.log(arr);
+ let result = "";
+
+ for (let i = 0; i < userChoice; i++) {
+  result += arr[Math.floor(Math.random() * arr.length)];
+ }
+ return result;
+};
 
 
 
